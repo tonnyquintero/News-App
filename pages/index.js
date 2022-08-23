@@ -19,7 +19,8 @@ export default function Home({ articles }) {
         {articles.length > 0 && articles.map((articles, index) => (
           <div key={index}>
             <h2>{articles.title}</h2>
-            <img src={articles.urlToImage} alt={`Image for the article ${articles.title}`} />
+            <img src={articles.urlToImage}
+             alt={`Image for the article ${articles.title}`} />
             <p>{articles.description}</p>
           </div>
         ))}
@@ -32,8 +33,9 @@ export default function Home({ articles }) {
   )
 }
 
-export async function getServerSideProps() {
-  const response = await fetch('https://newsapi.org/v2/everything?q=tesla&from=2022-07-22&sortBy=publishedAt&apiKey=855a5d081c924dbaa1258563591e46fb')
+// N request se ejcuta 1 vez en built time o pararefrescar la página
+export async function getStaticProps() {
+  const response = await fetch('https://newsapi.org/v2/everything?domains=techcrunch.com,thenextweb.com&page=1&apiKey=855a5d081c924dbaa1258563591e46fb')
   const { articles } = await response.json()
     return {
       props: {
@@ -41,3 +43,15 @@ export async function getServerSideProps() {
       }
     }
   }
+
+
+  // N request se ejecuta N veces
+// export async function getServerSideProps() {
+//   const response = await fetch('https://newsapi.org/v2/everything?q=tesla&from=2022-07-23&sortBy=publishedAt&apiKey=855a5d081c924dbaa1258563591e46fb')
+//   const { articles } = await response.json()
+//     return {
+//       props: {
+//         articles
+//       }
+//     }
+//   }
