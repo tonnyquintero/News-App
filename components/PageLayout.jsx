@@ -6,7 +6,7 @@ export default function PageLayout ({ children, title = 'NewsApp' }) {
         <>
             <Head>
                 <title>{title}</title>
-                <meta name="description" content="news app - the best app to read news" />
+                <meta name="description" content="news app - the best app to read the news" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <header>
